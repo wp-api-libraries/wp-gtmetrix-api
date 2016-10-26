@@ -5,9 +5,19 @@
  * @package WP-GTmetrix-API
  */
 
+/*
+* Plugin Name: WP GT Metrix API
+* Plugin URI: https://github.com/wp-api-libraries/wp-gtmetrix-api
+* Description: Perform API requests to GT Metrix in WordPress.
+* Author: imFORZA
+* Version: 1.0.0
+* Author URI: https://www.imforza.com
+* GitHub Plugin URI: https://github.com/wp-api-libraries/wp-gtmetrix-api
+* GitHub Branch: master
+*/
+
 /* Exit if accessed directly. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
-
 
 /* Check if class exists. */
 if ( ! class_exists( 'GTmetrixAPI' ) ) {
