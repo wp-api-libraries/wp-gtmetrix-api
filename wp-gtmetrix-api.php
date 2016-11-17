@@ -4,7 +4,6 @@
  *
  * @package WP-GTmetrix-API
  */
-
 /*
 * Plugin Name: WP GT Metrix API
 * Plugin URI: https://github.com/wp-api-libraries/wp-gtmetrix-api
@@ -15,25 +14,20 @@
 * GitHub Plugin URI: https://github.com/wp-api-libraries/wp-gtmetrix-api
 * GitHub Branch: master
 */
-
 /* Exit if accessed directly. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
-
 /* Check if class exists. */
 if ( ! class_exists( 'GTmetrixAPI' ) ) {
-
 	/**
 	 * GTmetrix API Class.
 	 */
 	class GTmetrixAPI {
-
 		/**
 		 * API Key.
 		 *
 		 * @var string
 		 */
 		static private $api_key;
-
 		/**
 		 * BaseAPI Endpoint
 		 *
@@ -41,8 +35,6 @@ if ( ! class_exists( 'GTmetrixAPI' ) ) {
 		 * @access protected
 		 */
 		protected $base_uri = 'https://gtmetrix.com/api/0.1/';
-
-
 		/**
 		 * __construct function.
 		 *
@@ -52,7 +44,6 @@ if ( ! class_exists( 'GTmetrixAPI' ) ) {
 		public function __construct( $api_key ) {
 			static::$api_key = $api_key;
 		}
-
 		/**
 		 * Fetch the request from the API.
 		 *
@@ -61,21 +52,14 @@ if ( ! class_exists( 'GTmetrixAPI' ) ) {
 		 * @return $body Body.
 		 */
 		private function fetch( $request ) {
-
 			$response = wp_remote_get( $request );
 			$code = wp_remote_retrieve_response_code( $response );
-
 			if ( 200 !== $code ) {
 				return new WP_Error( 'response-error', sprintf( __( 'Server response code: %d', 'text-domain' ), $code ) );
 			}
-
 			$body = wp_remote_retrieve_body( $response );
-
 			return json_decode( $body );
-
 		}
-
-
 		/**
 		 * Run Test.
 		 *
@@ -93,17 +77,77 @@ if ( ! class_exists( 'GTmetrixAPI' ) ) {
 		 * @param string $x_metrix_blacklist (default: '')
 		 * @return void
 		 */
-		function run_test( $url, $location ='', $browser = '', $login_user = '', $login_pass = '', $x_metrix_adblock = '0', $x_metrix_cookies = '', $x_metrix_video = '0', $x_metrix_throttle = '', $x_metrix_whitelist = '', $x_metrix_blacklist = '' ) {
-
+		public function run_test( $url, $location ='', $browser = '', $login_user = '', $login_pass = '', $x_metrix_adblock = '0', $x_metrix_cookies = '', $x_metrix_video = '0', $x_metrix_throttle = '', $x_metrix_whitelist = '', $x_metrix_blacklist = '' ) {
 			if ( empty( $url ) ) {
 				return new WP_Error( 'response-error', __( "Please provide a URL.", "text-domain" ) );
 			}
-
-			$request = $this->base_uri . $test;
-
+			$request = $this->base_uri . 'test';
 			return $this->fetch( $request );
+		}
+
+		/**
+		 * get_test_results function.
+		 *
+		 * @access public
+		 * @param mixed $test_id
+		 * @return void
+		 */
+		public function get_test_results( $test_id ) {
 
 		}
 
+		/**
+		 * get_test_resource function.
+		 *
+		 * @access public
+		 * @param mixed $test_id
+		 * @param mixed $resource
+		 * @return void
+		 */
+		public function get_test_resource( $test_id, $resource ) {
+
+		}
+
+		/**
+		 * get_locations function.
+		 *
+		 * @access public
+		 * @return void
+		 */
+		public function get_locations() {
+
+		}
+
+		/**
+		 * get_browsers function.
+		 *
+		 * @access public
+		 * @return void
+		 */
+		public function get_browsers() {
+
+		}
+
+		/**
+		 * get_browser_details function.
+		 *
+		 * @access public
+		 * @param mixed $browser_id
+		 * @return void
+		 */
+		public function get_browser_details( $browser_id ) {
+
+		}
+
+		/**
+		 * get_acct_status function.
+		 *
+		 * @access public
+		 * @return void
+		 */
+		public function get_acct_status() {
+			$request = $this->base_uri . 'status';
+			return $this->fetch( $request );
+		}
 	}
 }
