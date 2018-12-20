@@ -28,7 +28,7 @@ if ( ! class_exists( 'GTmetrixAPI' ) ) {
 		 * @var string
 		 */
 		protected $email;
-		
+
 		/**
 		 * API Key.
 		 *
@@ -67,7 +67,6 @@ if ( ! class_exists( 'GTmetrixAPI' ) ) {
 		protected function set_headers() {
 			// Set request headers.
 			$this->args['headers'] = array(
-				'Content-Type'  => 'application/json',
 				'Authorization' => 'Basic ' . base64_encode( "{$this->email}:{$this->api_key}" ),
 			);
 		}
@@ -144,9 +143,7 @@ if ( ! class_exists( 'GTmetrixAPI' ) ) {
 		 * @return void
 		 */
 		public function start_test( $url, $args = array() ) {
-			$args = array(
-				'body' => array( 'url' => $url )
-			);
+			$args =  array( 'url' => $url );
 
 			return $this->build_request( 'test', $args, 'POST' )->fetch();
 		}
