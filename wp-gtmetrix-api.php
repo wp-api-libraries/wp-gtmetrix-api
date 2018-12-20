@@ -28,7 +28,7 @@ if ( ! class_exists( 'GTmetrixAPI' ) ) {
 		 * @var string
 		 */
 		protected $email;
-		/**
+		
 		/**
 		 * API Key.
 		 *
